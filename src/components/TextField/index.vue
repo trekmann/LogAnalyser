@@ -1,10 +1,12 @@
 <template>
-  <code-list>
-    <code-list-element 
-      v-for="(t, index) in text"
-      :key="index"
-      :html="t" />
-  </code-list>
+  <div>
+    <code-list>
+      <code-list-element 
+        v-for="(t, index) in text"
+        :key="index"
+        :html="t" />
+    </code-list>
+  </div>
 </template>
 
 <script>
@@ -32,7 +34,7 @@ export default {
   data() {
     return {
       text: [],
-      fileUrl: '',
+      fileUrl: ''
     }
   }
 }

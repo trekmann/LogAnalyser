@@ -2,18 +2,20 @@
   <v-app>
     <toolbar></toolbar>
     <v-content>
-      <router-view/>
+      <home />
     </v-content>
   </v-app>
 </template>
 
 <script>
 import Toolbar from './components/Toolbar/index';
+import Home from './views/Home';
 
 export default {
   name: 'App',
   components: {
-    'toolbar': Toolbar
+    'toolbar': Toolbar,
+    'home': Home
   },
   data () {
     return {
