@@ -2,7 +2,7 @@
   <div>
     <v-menu v-model="menu" :close-on-content-click="false" offset-x>
       <v-btn :color="color" block slot="activator">
-        Makierung wählen
+        Choose selection
       </v-btn>
       <v-card>
         <color-picker 

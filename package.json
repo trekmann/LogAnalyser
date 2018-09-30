@@ -1,5 +1,5 @@
 {
-  "name": "log_analyser",
+  "name": "loganalyser",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -15,6 +15,7 @@
     "vue-color": "^2.6.0",
     "vue-electron": "^1.0.6",
     "vue-router": "^3.0.1",
+    "vue-virtual-scroller": "^0.12.0",
     "vuetify": "^1.0.19",
     "vuex": "^3.0.1"
   },

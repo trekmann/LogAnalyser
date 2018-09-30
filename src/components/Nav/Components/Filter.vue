@@ -11,7 +11,7 @@
       </v-list-tile>
       <v-list-tile>
         <v-text-field
-            label="RexEx Suchstring"
+            label="RexExp Searchstring"
             @input="textFieldChange"
             v-model="localRegExp"
           ></v-text-field>
@@ -23,7 +23,7 @@
         </ColorPopOver>
       </v-list-tile>
       <v-list-tile class="ma-2">
-        <v-btn class="ma-2" block color="error" @click="deleteFilter(id)">Löschen</v-btn>
+        <v-btn class="ma-2" block color="error" @click="deleteFilter(id)">Delete</v-btn>
       </v-list-tile>
     </v-list-group>
   </div>
@@ -31,12 +31,14 @@
 
 <script>
   import ColorPopOver from './ColorPopOver.vue';
+  import FilterBool from './FilterBool.vue';
   import { mapMutations } from 'vuex';
   import types from './../../../types.js';
 
   export default {
     components: {
-      ColorPopOver
+      ColorPopOver,
+      FilterBool
     },
     props: {
       id: String,

@@ -5,8 +5,10 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import VueElectron from 'vue-electron'
+import VueVirtualScroller from 'vue-virtual-scroller'
 
-Vue.use(VueElectron)
+
+Vue.use(VueElectron, VueVirtualScroller)
 
 Vue.config.productionTip = false
 

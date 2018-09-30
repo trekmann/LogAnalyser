@@ -18,7 +18,6 @@ export default new Vuex.Store({
   },
   getters: {
     filter: (state, getters) => {
-      console.log(state.filter);
       return state.filter;
     },
     fileUrl: (state, getters) => {
@@ -48,7 +47,6 @@ export default new Vuex.Store({
       state.filter.splice(delCount , 1)
     },
     [types.SET_FILE_URL] (state, fileUrl) {
-      console.log(fileUrl);
       state.fileUrl = fileUrl;
     }
   },
