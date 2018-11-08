@@ -49,11 +49,11 @@ export default {
       const fullExpr = new RegExp(regExpList
         .map(x=>x.source)
         .join("|")
-      )
+      );
       let list = [];
       for(let e of this.texts) {
         if(e.match(fullExpr)) {
-          list.push(e);
+          list.push(JSON.parse(JSON.stringify(e)));
         }
       }
       return list;
@@ -61,7 +61,7 @@ export default {
   }
 }
 </script>
-
+ 
 <style scoped>
 .fullscreen {
   height: calc(100vh - 64px);

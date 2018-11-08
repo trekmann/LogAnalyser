@@ -12,7 +12,7 @@ export default {
     });
   },
   props: {
-    html: String
+    html: String,
   },
   data () {
     return {
@@ -20,17 +20,43 @@ export default {
     }
   },
   methods: {
+    findall(regexp, s) {
+      let matches = [];
+      s.replace(regexp, function() {
+        let arr = ([]).slice.call(arguments, 0);
+        console.log(arr);
+        let extras = arr.splice(-2);
+        arr.index = extras[0];
+        arr.input = extras[1];
+        matches.push(arr);
+      });
+      return matches.length ? matches : null;
+    },
     highlight () {
       let ergHTML = this.html;
+      let regExpList = [];
+      for (const w of this.filter) {
+        regExpList.push(new RegExp(w.regExp, 'gm'));
+      }
+      const fullExpr = new RegExp(regExpList
+        .map(x=>x.source)
+        .join("|"),
+        'gm'
+      );
+      const matchesList = this.findall(fullExpr, this.html);
+
+      console.log(matchesList);
+
+      /*
       this.filter.map((f) => {
         if (!f.regExp) {
           return ergHTML;
         }
         const regExp = new RegExp(f.regExp + "(?![^<>]*>)", "gi");
         ergHTML = ergHTML.replace(regExp, match => {
-          return '<span style="background-color:' + f.color + ';">' + match + '</span>';
+          return `<span style="background-color:${f.color}" >${match}</span>`
         });
-      });
+      });*/
       return ergHTML;
     }
   }
