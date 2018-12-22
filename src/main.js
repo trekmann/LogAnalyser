@@ -8,7 +8,8 @@ import VueElectron from 'vue-electron'
 import VueVirtualScroller from 'vue-virtual-scroller'
 
 
-Vue.use(VueElectron, VueVirtualScroller)
+Vue.use(VueElectron)
+Vue.use(VueVirtualScroller)
 
 Vue.config.productionTip = false
 

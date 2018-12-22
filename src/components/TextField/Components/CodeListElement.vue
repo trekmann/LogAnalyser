@@ -24,7 +24,6 @@ export default {
       let matches = [];
       s.replace(regexp, function() {
         let arr = ([]).slice.call(arguments, 0);
-        console.log(arr);
         let extras = arr.splice(-2);
         arr.index = extras[0];
         arr.input = extras[1];
@@ -38,16 +37,12 @@ export default {
       for (const w of this.filter) {
         regExpList.push(new RegExp(w.regExp, 'gm'));
       }
-      const fullExpr = new RegExp(regExpList
+      /*const fullExpr = new RegExp(regExpList
         .map(x=>x.source)
         .join("|"),
         'gm'
-      );
-      const matchesList = this.findall(fullExpr, this.html);
-
-      console.log(matchesList);
-
-      /*
+      );*/
+      //const matchesList = this.findall(fullExpr, this.html);
       this.filter.map((f) => {
         if (!f.regExp) {
           return ergHTML;
@@ -56,7 +51,7 @@ export default {
         ergHTML = ergHTML.replace(regExp, match => {
           return `<span style="background-color:${f.color}" >${match}</span>`
         });
-      });*/
+      });
       return ergHTML;
     }
   }

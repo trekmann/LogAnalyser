@@ -1,18 +1,17 @@
 <template>
-  <div class="fullscreen">
-    <virtual-scroller class="scroller" :items="filteredTexts" item-height="42" buffer="400">
-      <template slot-scope="props">
-        <code-list-element
-          :html="props.item">
-        </code-list-element>
-      </template>
-    </virtual-scroller>
-  </div>
+  <div class="fullscrenn">
+    <virtual-list class="scroller" :size="codeElementHeigh" :remain="scrollerRemainElement">
+      <code-list-element
+        v-for="(item, index) of filteredTexts" :key="index"
+          :html="item">
+      </code-list-element>
+    </virtual-list>
+</div>
 </template>
 
 <script>
 import CodeListElement from './Components/CodeListElement';
-import { VirtualScroller } from 'vue-virtual-scroller';
+import virtualList from 'vue-virtual-scroll-list'
 import { stat } from 'fs';
 const fs = require('fs') 
 
@@ -28,16 +27,26 @@ export default {
       }
       this.filters = state.filter;
     });
+    window.addEventListener('resize', this.handleResize);
+    this.handleResize();
+  },
+  destroyed() {
+    window.removeEventListener('resize', this.handleResize)
   },
   components: {
-    'code-list-element': CodeListElement,
-    'virtual-scroller': VirtualScroller
+    'virtual-list': virtualList,
+    'code-list-element': CodeListElement
   },
   data() {
     return {
       texts: [],
       filters: [],
-      fileUrl: ''
+      fileUrl: '',
+      codeElementHeigh: 40,
+      window: {
+        width: 0,
+        height: 0
+      }
     }
   },
   computed: {
@@ -47,8 +56,11 @@ export default {
         regExpList.push(new RegExp(w.regExp, 'gi'));
       }
       const fullExpr = new RegExp(regExpList
-        .map(x=>x.source)
-        .join("|")
+        .map(x=> {
+          return '(?=.*' + x.source + ')'
+        })
+        .join('')
+        //.join("|")
       );
       let list = [];
       for(let e of this.texts) {
@@ -57,6 +69,16 @@ export default {
         }
       }
       return list;
+    },
+    scrollerRemainElement() {
+      console.log(this.window.height);
+      return (this.window.height-64)/this.codeElementHeigh;
+    }
+  },
+  methods: {
+    handleResize() {
+      this.window.width = window.innerWidth;
+      this.window.height = window.innerHeight;
     }
   }
 }
