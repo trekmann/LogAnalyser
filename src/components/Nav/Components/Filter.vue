@@ -13,7 +13,7 @@
         <v-text-field
             label="RexExp Searchstring"
             @input="textFieldChange"
-            v-model="localRegExp"
+            v-model="item.regExp"
           ></v-text-field>
       </v-list-tile>
       <v-list-tile class="ma-2">
@@ -21,6 +21,10 @@
           @colorChange="colorChange"
           class="ma-2">
         </ColorPopOver>
+      </v-list-tile>
+      <v-list-tile class="ma-2">
+        <FilterBool 
+        @buttonChange="buttonChange"/>
       </v-list-tile>
       <v-list-tile class="ma-2">
         <v-btn class="ma-2" block color="error" @click="deleteFilter(id)">Delete</v-btn>
@@ -46,8 +50,6 @@
     },
     data () {
       return {
-        localColor: '',
-        localRegExp: ''
       }
     },
     methods: {
@@ -55,22 +57,34 @@
         deleteFilter: types.DELETE_FILTER
       }),
       textFieldChange (e) {
-        this.localRegExp = e;
+        this.item.regExp = e;
         this.$store.commit(types.UPDATE_FILTER, {
           id: this.id,
           title: this.item.title,
-          regExp: this.localRegExp,
-          color: this.localColor
+          regExp: this.item.regExp,
+          color: this.item.color,
+          orORand: this.item.orORand
         });
       },
       colorChange (e) {
-        this.localColor = e;
+        this.item.color = e;
         this.$store.commit(types.UPDATE_FILTER, {
           id: this.id,
           title: this.item.title,
-          regExp: this.localRegExp,
-          color: this.localColor
+          regExp: this.item.regExp,
+          color: this.item.color,
+          orORand: this.item.orORand
         });      
+      },
+      buttonChange(e) {
+        this.item.orORand = e;
+        this.$store.commit(types.UPDATE_FILTER, {
+          id: this.id,
+          title: this.item.title,
+          regExp: this.item.regExp,
+          color: this.item.color,
+          orORand: this.item.orORand
+        }); 
       }
     }
   }

@@ -12,7 +12,8 @@ export default new Vuex.Store({
       title: 'Filter',
       color: '#75B3EF',
       regExp: '',
-      icon: 'filter_list'
+      icon: 'filter_list',
+      orORand: 1
     }],
     fileUrl: ''
   },

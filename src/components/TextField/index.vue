@@ -51,17 +51,16 @@ export default {
   },
   computed: {
     filteredTexts() { 
-      let regExpList = [];
+      let expString = '';
       for (const w of this.filters) {
-        regExpList.push(new RegExp(w.regExp, 'gi'));
+        expString = `${expString}`
+        if (w.orORand) {
+          expString = `${expString}|${w.regExp}`
+        } else {
+          expString = `${expString}(?=.*${w.regExp})`
+        }
       }
-      const fullExpr = new RegExp(regExpList
-        .map(x=> {
-          return '(?=.*' + x.source + ')'
-        })
-        .join('')
-        //.join("|")
-      );
+      const fullExpr = new RegExp(expString, 'gmi');
       let list = [];
       for(let e of this.texts) {
         if(e.match(fullExpr)) {

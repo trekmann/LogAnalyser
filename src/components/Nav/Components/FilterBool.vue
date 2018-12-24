@@ -1,5 +1,5 @@
 <template>
-  <v-btn-toggle block mandatory v-model="value">
+  <v-btn-toggle @change="_toggle" mandatory v-model="toggle">
     <v-Btn>AND</v-Btn>
     <v-Btn>OR</v-Btn>
   </v-btn-toggle>
@@ -9,7 +9,12 @@
 export default {
   data () {
     return {
-      value: ''
+      toggle: 1
+    }
+  },
+  methods: {
+    _toggle(event) {
+      this.$emit('buttonChange', event);
     }
   }
 }
