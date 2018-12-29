@@ -37,12 +37,6 @@ export default {
       for (const w of this.filter) {
         regExpList.push(new RegExp(w.regExp, 'gm'));
       }
-      /*const fullExpr = new RegExp(regExpList
-        .map(x=>x.source)
-        .join("|"),
-        'gm'
-      );*/
-      //const matchesList = this.findall(fullExpr, this.html);
       this.filter.map((f) => {
         if (!f.regExp) {
           return ergHTML;

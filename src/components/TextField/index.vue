@@ -6,26 +6,51 @@
           :html="item">
       </code-list-element>
     </virtual-list>
-</div>
+  </div>
 </template>
 
 <script>
 import CodeListElement from './Components/CodeListElement';
 import virtualList from 'vue-virtual-scroll-list'
-import { stat } from 'fs';
-const fs = require('fs') 
+import { stat, readFileSync } from 'fs';
+const fs = require('fs');
+
+const openFile = (fileUrl) => {
+  let data = [];
+  data = readFileSync(fileUrl, 'utf8');
+  data = data.split(/\r?\n/g);
+  return data;
+};
+
+const filteredTexts = (filters, texts) => { 
+  let expString = '';
+  for (const w of filters) {
+    expString = `${expString}`
+    if (w.orORand) {
+      expString = `${expString}|${w.regExp}`
+    } else {
+      expString = `${expString}(?=.*${w.regExp})`
+    }
+  }
+  const fullExpr = new RegExp(expString, 'gmi');
+  let list = [];
+  texts.forEach((text) => {
+    if (fullExpr.exec(text) != null) {
+      list.push(JSON.parse(JSON.stringify(text)));
+    }
+  });
+  return list;
+};
 
 export default {
   created () {
     this.$store.watch((state) => {
-      this.fileUrl = state.fileUrl;
-      if (this.fileUrl) {
-        fs.readFile(this.fileUrl, 'utf8', (err, data) => {
-          if (err) throw err;
-          this.texts = data.split(/\r?\n/g);
-        });
+      const filters = state.filter;
+      if (this.fileUrl !== state.fileUrl) {
+        this.fileUrl = state.fileUrl;
+        this.opendFiles = openFile(state.fileUrl);
       }
-      this.filters = state.filter;
+      this.filteredTexts = filteredTexts(filters, this.opendFiles);
     });
     window.addEventListener('resize', this.handleResize);
     this.handleResize();
@@ -39,10 +64,11 @@ export default {
   },
   data() {
     return {
-      texts: [],
-      filters: [],
-      fileUrl: '',
+      filteredTexts: [],
       codeElementHeigh: 40,
+      opendFiles: [],
+      fileUrl: '',
+      fullExpr: new RegExp(),
       window: {
         width: 0,
         height: 0
@@ -50,27 +76,7 @@ export default {
     }
   },
   computed: {
-    filteredTexts() { 
-      let expString = '';
-      for (const w of this.filters) {
-        expString = `${expString}`
-        if (w.orORand) {
-          expString = `${expString}|${w.regExp}`
-        } else {
-          expString = `${expString}(?=.*${w.regExp})`
-        }
-      }
-      const fullExpr = new RegExp(expString, 'gmi');
-      let list = [];
-      for(let e of this.texts) {
-        if(e.match(fullExpr)) {
-          list.push(JSON.parse(JSON.stringify(e)));
-        }
-      }
-      return list;
-    },
     scrollerRemainElement() {
-      console.log(this.window.height);
       return (this.window.height-64)/this.codeElementHeigh;
     }
   },
