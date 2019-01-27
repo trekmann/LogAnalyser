@@ -19,8 +19,9 @@
     methods: {
       openFile () {
         let fileUrlArray = electron.remote.dialog.showOpenDialog({properties: ['openFile']});
+        //console.log(fileUrlArray);
         if (fileUrlArray && fileUrlArray.length > 0) {
-          this.$store.commit(types.SET_FILE_URL, fileUrlArray[0]); 
+          this.$store.commit(types.SET_FILE_URL, fileUrlArray[0]);
         }
       }
     }

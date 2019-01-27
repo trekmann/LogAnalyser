@@ -1,25 +1,13 @@
 // vue.config.js
 module.exports = {
-  configureWebpack: {
-    plugins: [
-    ]
-  },
-  devServer: {
-    disableHostCheck: true
+   pluginOptions: {
+    electronBuilder: {
+      builderOptions: {
+        appId: "de.trekmann.loganalyser",
+        productName: "Log Analyser",
+        icon: "./src/assets/icon_512x512.png",
+        copyright: `Copyright © 2019 Marcell Kalsen-Friese`
+      }
+    }
   }
-}
-
-/** 
- * 
- * 
-      {electronBuilder: {
-        builderOptions: {
-          "appId": "de.trekmann.loganalyser",
-          "icon": "./src/assets/logo.png"
-        }
-      }}
- * 
- * "files": [
-            "dist_electron/bundled/background.js"
-          ],
-*/
+};
