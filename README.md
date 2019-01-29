@@ -14,3 +14,5 @@ yarn run serve
 ```
 yarn run build
 ```
+
+![alt text](https://github.com/trekmann/LogAnalyser/generel/Screen.png "Picture")

@@ -27,6 +27,8 @@ function createWindow () {
     win.loadURL('app://./index.html')
   }
 
+  require('./menu')
+
   win.on('closed', () => {
     win = null
   })
