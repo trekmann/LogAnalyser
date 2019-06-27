@@ -1,7 +1,5 @@
 <template>
-  <div class="white">
-    <div v-html="highlight()"></div>
-  </div>
+  <div class="white" v-html="highlight()"></div>
 </template>
 
 <script>
@@ -51,3 +49,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+  .white {
+    border-bottom: 1px solid lightgray !important;
+  }
+</style>

@@ -35,13 +35,10 @@ export default new Vuex.Store({
       });
     },
     [types.UPDATE_FILTER] (state, payload) {
-      state.filter.map((item) => {
-        if (item.id === payload.id) {
-          item.title = payload.title;
-          payload.color.length > 0 ? item.color = payload.color : item.color = item.color;
-          item.regExp = payload.regExp;
-        }
+      state.filter = state.filter.filter(item => {
+        return item.id.toString() !== payload.id.toString();
       });
+      state.filter.push(payload);
     },
     [types.DELETE_FILTER] (state, id) {
       let delCount = state.filter.map((f) => {return f.id}).indexOf(id);

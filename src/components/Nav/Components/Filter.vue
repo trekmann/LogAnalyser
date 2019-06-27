@@ -11,7 +11,7 @@
       </v-list-tile>
       <v-list-tile>
         <v-text-field
-            label="RexExp Searchstring"
+            label="Searchstring"
             @input="textFieldChange"
             v-model="item.regExp"
           ></v-text-field>
@@ -22,10 +22,10 @@
           class="ma-2">
         </ColorPopOver>
       </v-list-tile>
-      <v-list-tile class="ma-2">
+      <!--<v-list-tile class="ma-2">
         <FilterBool 
         @buttonChange="buttonChange"/>
-      </v-list-tile>
+      </v-list-tile>-->
       <v-list-tile class="ma-2">
         <v-btn class="ma-2" block color="error" @click="deleteFilter(id)">Delete</v-btn>
       </v-list-tile>
@@ -63,7 +63,8 @@
           title: this.item.title,
           regExp: this.item.regExp,
           color: this.item.color,
-          orORand: this.item.orORand
+          orORand: this.item.orORand,
+          icon: 'filter_list'
         });
       },
       colorChange (e) {
@@ -73,7 +74,8 @@
           title: this.item.title,
           regExp: this.item.regExp,
           color: this.item.color,
-          orORand: this.item.orORand
+          orORand: this.item.orORand,
+          icon: 'filter_list'
         });      
       },
       buttonChange(e) {
@@ -83,7 +85,8 @@
           title: this.item.title,
           regExp: this.item.regExp,
           color: this.item.color,
-          orORand: this.item.orORand
+          orORand: this.item.orORand,
+          icon: 'filter_list'
         }); 
       }
     }
