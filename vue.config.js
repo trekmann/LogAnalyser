@@ -6,7 +6,8 @@ module.exports = {
         appId: "de.trekmann.loganalyser",
         productName: "Log Analyser",
         icon: "./src/assets/icon_512x512.png",
-        copyright: `Copyright © 2019 Marcell Kalsen-Friese`
+        copyright: `Copyright © 2019 Marcell Kalsen-Friese`,
+        electronVersion: "5.0.6"
       }
     }
   }
